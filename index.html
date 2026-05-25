@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn Claude Into Your Personal Travel Agent | Bogen.ai</title>
+<meta name="description" content="A free AI tool from Bogen.ai. Turn Claude into your own personal travel agent that finds nonstop flights, tracks the best fares, and builds your itineraries.">
+<meta property="og:title" content="Turn Claude Into Your Personal Travel Agent">
+<meta property="og:description" content="A free AI tool from Bogen.ai — turn Claude into a travel agent that books smarter than you do.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="social-card.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a3e5c;
+    --cyan: #00a8e1;
+    --white: #ffffff;
+    --black: #000000;
+    --gray-light: #f4f4f4;
+    --gray-mid: #e8e8e8;
+    --text: #333333;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 6vw;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 12px; }
+  .b-mark {
+    width: 42px; height: 42px; border-radius: 9px;
+    background: var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+    color: #08374a; font-weight: 700; font-size: 22px;
+  }
+  .nav-name {
+    color: var(--white); font-size: 20px; font-weight: 700;
+    letter-spacing: 0.01em; line-height: 1.2;
+  }
+  .nav-name .dot { color: var(--cyan); }
+  .nav-name span {
+    color: var(--cyan); display: block; font-size: 9px; font-weight: 400;
+    letter-spacing: 0.14em; text-transform: uppercase; margin-top: 2px;
+  }
+  .nav-cta {
+    background: var(--cyan); color: #08374a;
+    text-decoration: none; padding: 12px 28px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #0090c2; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #12304a 100%);
+    color: var(--white);
+    padding: 100px 6vw 110px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; top: -80px; right: -80px;
+    width: 320px; height: 320px; border-radius: 50%;
+    border: 1px solid rgba(0,168,225,0.18);
+  }
+  .hero::after {
+    content: ""; position: absolute; bottom: -120px; left: -60px;
+    width: 260px; height: 260px; border-radius: 50%;
+    border: 1px solid rgba(0,168,225,0.12);
+  }
+  .hero-eyebrow {
+    color: var(--cyan); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-weight: 300; font-size: clamp(34px, 6vw, 60px);
+    line-height: 1.15; letter-spacing: 0.01em; max-width: 900px;
+    margin: 0 auto 26px;
+  }
+  .hero h1 strong { font-weight: 700; color: var(--cyan); }
+  .hero p {
+    font-size: clamp(16px, 2.2vw, 19px); font-weight: 300;
+    max-width: 620px; margin: 0 auto 40px; color: rgba(255,255,255,0.85);
+  }
+  .btn-primary {
+    display: inline-block; background: var(--cyan); color: #08374a;
+    text-decoration: none; padding: 18px 48px;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; transition: transform 0.15s, background 0.2s;
+  }
+  .btn-primary:hover { background: #0090c2; transform: translateY(-2px); }
+
+  /* ---------- SECTION SHELL ---------- */
+  section { padding: 90px 6vw; }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  .accent-bar {
+    width: 4px; height: 34px; background: var(--cyan);
+    display: inline-block; vertical-align: middle; margin-right: 16px;
+  }
+  .section-head {
+    display: flex; align-items: center; margin-bottom: 18px;
+  }
+  .section-head h2 {
+    font-weight: 600; font-size: clamp(24px, 3.5vw, 32px);
+    color: var(--navy); letter-spacing: 0.01em;
+  }
+  .lead { font-size: 18px; color: var(--text); margin-bottom: 14px; }
+
+  /* ---------- WHY / VALUE ---------- */
+  .value { background: var(--gray-light); }
+  .feature-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 28px; margin-top: 40px;
+  }
+  .feature {
+    background: var(--white); padding: 32px 28px;
+    border-top: 3px solid var(--cyan);
+  }
+  .feature h3 {
+    font-size: 17px; font-weight: 600; color: var(--navy); margin-bottom: 10px;
+  }
+  .feature p { font-size: 15px; color: var(--text); }
+
+  /* ---------- STEPS ---------- */
+  .step { display: flex; gap: 22px; margin-bottom: 34px; align-items: flex-start; }
+  .step-num {
+    flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%;
+    background: var(--navy); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 18px;
+  }
+  .step-body h3 { font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+  .step-body p { font-size: 15px; color: var(--text); }
+
+  /* ---------- PROMPT BOX ---------- */
+  .prompt-section { background: var(--navy); color: var(--white); }
+  .prompt-section .section-head h2 { color: var(--white); }
+  .prompt-section .lead { color: rgba(255,255,255,0.85); }
+  .prompt-box {
+    background: #0f2538; border: 1px solid rgba(0,168,225,0.3);
+    border-radius: 4px; margin-top: 32px;
+  }
+  .prompt-box-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .prompt-box-head span {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--cyan); font-weight: 600;
+  }
+  .copy-btn {
+    background: var(--cyan); color: #08374a; border: none;
+    padding: 8px 18px; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+    font-family: inherit; transition: background 0.2s;
+  }
+  .copy-btn:hover { background: #0090c2; }
+  pre {
+    margin: 0; padding: 24px 22px; overflow-x: auto;
+    font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+    font-size: 12.5px; line-height: 1.65; color: #d8e6f0;
+    white-space: pre-wrap; word-break: break-word;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta-section { background: var(--gray-light); text-align: center; }
+  .cta-card {
+    background: var(--white); max-width: 680px; margin: 0 auto;
+    padding: 56px 44px; border-top: 4px solid var(--cyan);
+  }
+  .cta-card h2 {
+    font-weight: 600; font-size: clamp(22px, 3vw, 30px);
+    color: var(--navy); margin-bottom: 16px;
+  }
+  .cta-card p { font-size: 16px; margin-bottom: 30px; }
+  .btn-outline {
+    display: inline-block; background: transparent; color: var(--navy);
+    border: 2px solid var(--cyan); text-decoration: none;
+    padding: 15px 40px; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; margin: 6px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { background: var(--cyan); color: #08374a; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.7);
+    padding: 48px 6vw; text-align: center;
+  }
+  .footer-brand {
+    color: var(--white); font-size: 20px; font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .footer-brand .dot { color: var(--cyan); }
+  .footer-sub {
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 22px;
+  }
+  footer a { color: var(--cyan); text-decoration: none; }
+  .footer-contact { font-size: 13px; line-height: 1.9; }
+  .footer-disclaimer {
+    margin-top: 26px; font-size: 11px; color: rgba(255,255,255,0.4);
+    line-height: 1.6; max-width: 620px; margin-left: auto; margin-right: auto;
+  }
+
+  @media (max-width: 600px) {
+    .nav-name { font-size: 17px; }
+    .nav-cta { padding: 10px 16px; }
+    section { padding: 64px 7vw; }
+    .hero { padding: 70px 7vw 80px; }
+    .cta-card { padding: 40px 26px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="b-mark">B</div>
+    <div class="nav-name">
+      Bogen<span class="dot" style="display:inline">.ai</span>
+      <span>AI Consulting &amp; Coaching</span>
+    </div>
+  </div>
+  <a href="#contact" class="nav-cta">Work With Bogen.ai</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-eyebrow">A Free AI Tool From Bogen.ai</div>
+  <h1>Turn Claude Into Your Own <strong>Personal Travel Agent</strong></h1>
+  <p>The same AI systems I build for businesses can plan your travel — nonstop flights, the best fares, and itineraries built around your calendar. Here's the exact setup, free.</p>
+  <a href="#prompt" class="btn-primary">Get The Setup</a>
+</header>
+
+<section class="value">
+  <div class="wrap">
+    <div class="section-head"><span class="accent-bar"></span><h2>Why I Built This</h2></div>
+    <p class="lead">I'm Edmund Bogen, founder of Bogen.ai. I help people and businesses put AI to work in ways that actually save time and money.</p>
+    <p>I fly constantly &mdash; New York, Los Angeles, speaking engagements. So I built an AI travel agent inside Claude that handles the whole thing: it finds the nonstop flights I require, hunts down the cheapest days to fly, and formats every itinerary the way I like it. It works so well I decided to give the entire setup away. No catch. It's a small, practical taste of what AI can do when you set it up right &mdash; and a window into the work we do at Bogen.ai.</p>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Nonstop, Always</h3>
+        <p>Tell it your rules once &mdash; preferred airline, home airport, aisle seat &mdash; and it never books a connection again.</p>
+      </div>
+      <div class="feature">
+        <h3>Best Fares, Best Days</h3>
+        <p>It shows you which travel days are cheapest and flags when shifting a day or two saves real money.</p>
+      </div>
+      <div class="feature">
+        <h3>Built Around You</h3>
+        <p>Connect your calendar and it checks for conflicts before it ever proposes a date.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head"><span class="accent-bar"></span><h2>How To Set It Up</h2></div>
+    <p class="lead">Three steps. Takes about ten minutes. You'll need a Claude account.</p>
+    <div style="margin-top:36px;">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Create a project in Claude</h3>
+          <p>Open Claude, create a new project, and name it "Travel Agent." A project keeps every trip you plan in one organized place.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Paste in the instructions</h3>
+          <p>Copy the prompt below into the project's custom instructions. This is the brain &mdash; it tells Claude exactly how to act as your travel agent. Edit the traveler profile to make it yours.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Connect your tools (optional)</h3>
+          <p>For the full experience, connect your Calendar and email so it can check your schedule and draft confirmations. Skip this and it still plans beautifully &mdash; it just won't have your calendar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prompt-section" id="prompt">
+  <div class="wrap">
+    <div class="section-head"><span class="accent-bar"></span><h2>The Travel Agent Prompt</h2></div>
+    <p class="lead">Copy this in full. Replace the bracketed details with your own &mdash; your airline, your home airport, your seat preference &mdash; and you're done.</p>
+    <div class="prompt-box">
+      <div class="prompt-box-head">
+        <span>Travel Agent — Project Instructions</span>
+        <button class="copy-btn" onclick="copyPrompt()">Copy</button>
+      </div>
+      <pre id="prompt-text">ROLE
+You are my personal travel agent. You research, plan, price-shop, and
+prep bookings end-to-end. You act &mdash; draft the emails, build the
+itinerary docs, check my calendar &mdash; you don't just advise.
+
+TRAVELER PROFILE  (&mdash; edit this section to make it yours &mdash;)
+- Home airport: [your airport]. Use a secondary airport only when it
+  delivers a better nonstop or clearly beats the price.
+- Preferred airline: [your airline] + loyalty number. Loyalty is a
+  tiebreaker, not a rule &mdash; if another carrier clearly wins on price
+  or schedule, surface it and tell me plainly.
+- HARD RULE: all flights must be NONSTOP / DIRECT. No connections.
+- Seat preference: [aisle / window].
+- Frequent routes: [e.g. South Florida to New York / Los Angeles].
+- Default hotels: [your go-to hotel in cities you visit often].
+- Hotels: I often book flights WITHOUT a hotel. NEVER assume &mdash;
+  always ASK whether I want a hotel before researching one.
+
+HOW YOU OPERATE
+- Specificity first. Real flight numbers, real fare classes, real
+  hotels &mdash; never "a morning flight" or "a nice hotel nearby."
+- Check my calendar before proposing dates; flag any conflicts.
+- Search live for all flight pricing. Label findings
+  "verify before booking."
+- Show me the analysis: which days are cheapest, and whether
+  flexing my dates by a day or two saves meaningful money.
+- Present 2-3 flight options at different price/time points.
+
+WORKFLOW FOR EVERY TRIP
+1. Confirm travel dates against my calendar.
+2. Find nonstop flights &mdash; my preferred airline plus the best
+   alternative. Note the cheapest days to fly.
+3. ASK whether I want a hotel. If yes, research it. If no, skip it.
+4. Produce a clean, organized itinerary.
+5. Give me ONE risk or consideration (weather, peak pricing,
+   sellouts, ID requirements, etc.).
+6. Offer to draft confirmation notes and add holds to my calendar.
+
+RULES
+- Flag time-sensitive items: peak pricing, festivals, sellouts.
+- If uncertain about live prices or availability, say
+  "verify before booking" &mdash; never guess.
+- You can research, format, and prep, but you cannot complete a
+  purchase. Hand me decision-ready options; I book at the
+  payment screen.</pre>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="cta-card">
+    <h2>Imagine This Working Across Your Whole Business</h2>
+    <p>This travel agent is one small example. At Bogen.ai we build AI systems that automate the repetitive, time-draining work inside real businesses &mdash; and coach teams to use AI with confidence. If a ten-minute tool can do this, picture what a properly built system could do for you.</p>
+    <a href="mailto:edmund@bogenhomes.com" class="btn-outline">Email Edmund</a>
+    <a href="https://bogen.ai" class="btn-outline">Visit Bogen.ai</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Bogen<span class="dot">.ai</span></div>
+  <div class="footer-sub">AI Consulting &amp; Coaching — Founded by Edmund Bogen</div>
+  <div class="footer-contact">
+    <a href="mailto:edmund@bogenhomes.com">edmund@bogenhomes.com</a><br>
+    <a href="https://bogen.ai">bogen.ai</a>
+  </div>
+  <p class="footer-disclaimer">
+    This travel tool is offered free as a courtesy. It helps you research and organize travel
+    but does not complete bookings &mdash; always confirm prices and availability directly with
+    the airline or hotel before purchasing. Bogen.ai is an AI consulting and coaching company
+    and is not a licensed travel agency.
+  </p>
+</footer>
+
+<script>
+  function copyPrompt() {
+    var el = document.getElementById('prompt-text');
+    var text = el.innerText || el.textContent;
+    navigator.clipboard.writeText(text).then(function () {
+      var btn = document.querySelector('.copy-btn');
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function () { btn.textContent = original; }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>

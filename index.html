@@ -4,393 +4,269 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Turn Claude Into Your Personal Travel Agent | Bogen.ai</title>
-<meta name="description" content="A free AI tool from Bogen.ai. Turn Claude into your own personal travel agent that finds nonstop flights, tracks the best fares, and builds your itineraries.">
+<meta name="description" content="The exact prompt that turns Claude into a personal AI travel agent that knows your airline, your seat, your home airport, and your non-negotiables. Free from Bogen.ai.">
 <meta property="og:title" content="Turn Claude Into Your Personal Travel Agent">
-<meta property="og:description" content="A free AI tool from Bogen.ai — turn Claude into a travel agent that books smarter than you do.">
+<meta property="og:description" content="Free setup guide: the exact prompt that makes Claude plan every trip like it's known you for years.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="social-card.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #1a3e5c;
-    --cyan: #00a8e1;
-    --white: #ffffff;
-    --black: #000000;
-    --gray-light: #f4f4f4;
-    --gray-mid: #e8e8e8;
-    --text: #333333;
+  :root{
+    --navy:#1a3e5c;
+    --navy-deep:#122c42;
+    --cyan:#00a8e1;
+    --cyan-dark:#0090c2;
+    --white:#ffffff;
+    --gray-bg:#f4f4f4;
+    --text:#333333;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--text);
-    line-height: 1.7;
-    background: var(--white);
-    -webkit-font-smoothing: antialiased;
-  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);background:var(--white);line-height:1.7;font-size:17px;}
+  .container{max-width:700px;margin:0 auto;padding:0 24px;}
 
-  /* ---------- NAV ---------- */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--navy);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 6vw;
-  }
-  .nav-brand { display: flex; align-items: center; gap: 12px; }
-  .b-mark {
-    width: 42px; height: 42px; border-radius: 9px;
-    background: var(--cyan);
-    display: flex; align-items: center; justify-content: center;
-    color: #08374a; font-weight: 700; font-size: 22px;
-  }
-  .nav-name {
-    color: var(--white); font-size: 20px; font-weight: 700;
-    letter-spacing: 0.01em; line-height: 1.2;
-  }
-  .nav-name .dot { color: var(--cyan); }
-  .nav-name span {
-    color: var(--cyan); display: block; font-size: 9px; font-weight: 400;
-    letter-spacing: 0.14em; text-transform: uppercase; margin-top: 2px;
-  }
-  .nav-cta {
-    background: var(--cyan); color: #08374a;
-    text-decoration: none; padding: 12px 28px;
-    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase; transition: background 0.2s;
-  }
-  .nav-cta:hover { background: #0090c2; }
+  /* HERO */
+  .hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%);color:var(--white);padding:96px 0 80px;text-align:center;position:relative;overflow:hidden;}
+  .hero::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:60px;background:var(--white);clip-path:polygon(0 100%,100% 100%,100% 0);}
+  .brand{font-size:14px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:var(--cyan);margin-bottom:28px;}
+  .hero h1{font-weight:300;font-size:clamp(32px,5.5vw,52px);letter-spacing:0.06em;text-transform:uppercase;line-height:1.25;margin-bottom:24px;}
+  .hero h1 strong{font-weight:600;color:var(--cyan);}
+  .hero p{font-size:19px;font-weight:300;max-width:560px;margin:0 auto;color:rgba(255,255,255,0.9);}
+  .plane{font-size:40px;margin-bottom:20px;display:block;}
 
-  /* ---------- HERO ---------- */
-  .hero {
-    background: linear-gradient(135deg, var(--navy) 0%, #12304a 100%);
-    color: var(--white);
-    padding: 100px 6vw 110px;
-    text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: ""; position: absolute; top: -80px; right: -80px;
-    width: 320px; height: 320px; border-radius: 50%;
-    border: 1px solid rgba(0,168,225,0.18);
-  }
-  .hero::after {
-    content: ""; position: absolute; bottom: -120px; left: -60px;
-    width: 260px; height: 260px; border-radius: 50%;
-    border: 1px solid rgba(0,168,225,0.12);
-  }
-  .hero-eyebrow {
-    color: var(--cyan); font-size: 12px; font-weight: 600;
-    letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 24px;
-  }
-  .hero h1 {
-    font-weight: 300; font-size: clamp(34px, 6vw, 60px);
-    line-height: 1.15; letter-spacing: 0.01em; max-width: 900px;
-    margin: 0 auto 26px;
-  }
-  .hero h1 strong { font-weight: 700; color: var(--cyan); }
-  .hero p {
-    font-size: clamp(16px, 2.2vw, 19px); font-weight: 300;
-    max-width: 620px; margin: 0 auto 40px; color: rgba(255,255,255,0.85);
-  }
-  .btn-primary {
-    display: inline-block; background: var(--cyan); color: #08374a;
-    text-decoration: none; padding: 18px 48px;
-    font-size: 13px; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; transition: transform 0.15s, background 0.2s;
-  }
-  .btn-primary:hover { background: #0090c2; transform: translateY(-2px); }
+  /* SECTIONS */
+  section{padding:72px 0;}
+  .accent-block{border-left:4px solid var(--cyan);padding-left:24px;margin:0 0 32px;}
+  h2{font-weight:500;font-size:26px;color:var(--navy);letter-spacing:0.03em;margin-bottom:16px;}
+  .lead{font-size:18px;}
+  ul.benefits{list-style:none;margin:28px 0;}
+  ul.benefits li{padding:10px 0 10px 36px;position:relative;}
+  ul.benefits li::before{content:'✓';position:absolute;left:0;top:10px;color:var(--cyan);font-weight:700;font-size:18px;}
 
-  /* ---------- SECTION SHELL ---------- */
-  section { padding: 90px 6vw; }
-  .wrap { max-width: 760px; margin: 0 auto; }
-  .accent-bar {
-    width: 4px; height: 34px; background: var(--cyan);
-    display: inline-block; vertical-align: middle; margin-right: 16px;
-  }
-  .section-head {
-    display: flex; align-items: center; margin-bottom: 18px;
-  }
-  .section-head h2 {
-    font-weight: 600; font-size: clamp(24px, 3.5vw, 32px);
-    color: var(--navy); letter-spacing: 0.01em;
-  }
-  .lead { font-size: 18px; color: var(--text); margin-bottom: 14px; }
+  /* GATE / FORM */
+  .gate{background:var(--gray-bg);padding:72px 0;}
+  .gate-card{background:var(--white);border-top:4px solid var(--cyan);box-shadow:0 8px 40px rgba(26,62,92,0.12);padding:48px 40px;text-align:center;}
+  .gate-card h2{margin-bottom:8px;}
+  .gate-card .sub{color:#666;margin-bottom:32px;font-size:16px;}
+  .field{margin-bottom:18px;text-align:left;}
+  .field label{display:block;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--navy);margin-bottom:6px;}
+  .field input{width:100%;padding:15px 16px;font-family:inherit;font-size:16px;border:1px solid #d5dbe1;border-radius:2px;background:#fbfcfd;transition:border-color .2s;}
+  .field input:focus{outline:none;border-color:var(--cyan);}
+  .btn{display:inline-block;width:100%;background:var(--cyan);color:var(--white);border:none;cursor:pointer;padding:18px 40px;font-family:inherit;font-size:15px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;border-radius:2px;transition:background .2s;margin-top:8px;}
+  .btn:hover{background:var(--cyan-dark);}
+  .btn:disabled{background:#9fb3c0;cursor:wait;}
+  .privacy{font-size:13px;color:#888;margin-top:16px;}
+  .form-error{display:none;color:#b3261e;font-size:14px;margin-top:14px;}
 
-  /* ---------- WHY / VALUE ---------- */
-  .value { background: var(--gray-light); }
-  .feature-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-    gap: 28px; margin-top: 40px;
-  }
-  .feature {
-    background: var(--white); padding: 32px 28px;
-    border-top: 3px solid var(--cyan);
-  }
-  .feature h3 {
-    font-size: 17px; font-weight: 600; color: var(--navy); margin-bottom: 10px;
-  }
-  .feature p { font-size: 15px; color: var(--text); }
+  /* UNLOCKED CONTENT */
+  #unlocked{display:none;}
+  .success-banner{background:var(--navy);color:var(--white);text-align:center;padding:28px 24px;font-weight:500;letter-spacing:0.05em;}
+  .success-banner span{color:var(--cyan);font-weight:600;}
+  .prompt-wrap{position:relative;margin:32px 0;}
+  pre{background:var(--navy-deep);color:#dce8f2;padding:32px 28px;border-radius:4px;font-family:'SF Mono',Consolas,Menlo,monospace;font-size:13.5px;line-height:1.65;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word;}
+  .copy-btn{position:absolute;top:14px;right:14px;background:var(--cyan);color:var(--white);border:none;cursor:pointer;padding:9px 18px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;border-radius:2px;transition:background .2s;}
+  .copy-btn:hover{background:var(--cyan-dark);}
+  .steps{counter-reset:step;margin:32px 0;}
+  .step{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid #eceff2;}
+  .step:last-child{border-bottom:none;}
+  .step-num{counter-increment:step;flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:17px;}
+  .step-num::before{content:counter(step);}
+  .step h3{font-weight:600;font-size:17px;color:var(--navy);margin-bottom:4px;}
+  .step p{font-size:15.5px;color:#555;}
 
-  /* ---------- STEPS ---------- */
-  .step { display: flex; gap: 22px; margin-bottom: 34px; align-items: flex-start; }
-  .step-num {
-    flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%;
-    background: var(--navy); color: var(--white);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 18px;
-  }
-  .step-body h3 { font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
-  .step-body p { font-size: 15px; color: var(--text); }
+  /* CTA */
+  .cta{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%);color:var(--white);text-align:center;padding:80px 0;}
+  .cta h2{color:var(--white);font-weight:300;font-size:30px;letter-spacing:0.05em;text-transform:uppercase;}
+  .cta h2 strong{font-weight:600;color:var(--cyan);}
+  .cta p{max-width:540px;margin:20px auto 36px;color:rgba(255,255,255,0.88);font-weight:300;}
+  .cta a{display:inline-block;background:var(--cyan);color:var(--white);text-decoration:none;padding:18px 48px;font-size:15px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;border-radius:2px;transition:background .2s;}
+  .cta a:hover{background:var(--cyan-dark);}
 
-  /* ---------- PROMPT BOX ---------- */
-  .prompt-section { background: var(--navy); color: var(--white); }
-  .prompt-section .section-head h2 { color: var(--white); }
-  .prompt-section .lead { color: rgba(255,255,255,0.85); }
-  .prompt-box {
-    background: #0f2538; border: 1px solid rgba(0,168,225,0.3);
-    border-radius: 4px; margin-top: 32px;
-  }
-  .prompt-box-head {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .prompt-box-head span {
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--cyan); font-weight: 600;
-  }
-  .copy-btn {
-    background: var(--cyan); color: #08374a; border: none;
-    padding: 8px 18px; font-size: 10px; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
-    font-family: inherit; transition: background 0.2s;
-  }
-  .copy-btn:hover { background: #0090c2; }
-  pre {
-    margin: 0; padding: 24px 22px; overflow-x: auto;
-    font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
-    font-size: 12.5px; line-height: 1.65; color: #d8e6f0;
-    white-space: pre-wrap; word-break: break-word;
-  }
+  footer{background:var(--navy-deep);color:rgba(255,255,255,0.6);text-align:center;padding:36px 24px;font-size:13px;letter-spacing:0.05em;}
+  footer a{color:var(--cyan);text-decoration:none;}
 
-  /* ---------- CTA ---------- */
-  .cta-section { background: var(--gray-light); text-align: center; }
-  .cta-card {
-    background: var(--white); max-width: 680px; margin: 0 auto;
-    padding: 56px 44px; border-top: 4px solid var(--cyan);
-  }
-  .cta-card h2 {
-    font-weight: 600; font-size: clamp(22px, 3vw, 30px);
-    color: var(--navy); margin-bottom: 16px;
-  }
-  .cta-card p { font-size: 16px; margin-bottom: 30px; }
-  .btn-outline {
-    display: inline-block; background: transparent; color: var(--navy);
-    border: 2px solid var(--cyan); text-decoration: none;
-    padding: 15px 40px; font-size: 12px; font-weight: 600;
-    letter-spacing: 0.12em; text-transform: uppercase; margin: 6px;
-    transition: background 0.2s, color 0.2s;
-  }
-  .btn-outline:hover { background: var(--cyan); color: #08374a; }
-
-  /* ---------- FOOTER ---------- */
-  footer {
-    background: var(--navy); color: rgba(255,255,255,0.7);
-    padding: 48px 6vw; text-align: center;
-  }
-  .footer-brand {
-    color: var(--white); font-size: 20px; font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .footer-brand .dot { color: var(--cyan); }
-  .footer-sub {
-    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--cyan); margin-bottom: 22px;
-  }
-  footer a { color: var(--cyan); text-decoration: none; }
-  .footer-contact { font-size: 13px; line-height: 1.9; }
-  .footer-disclaimer {
-    margin-top: 26px; font-size: 11px; color: rgba(255,255,255,0.4);
-    line-height: 1.6; max-width: 620px; margin-left: auto; margin-right: auto;
-  }
-
-  @media (max-width: 600px) {
-    .nav-name { font-size: 17px; }
-    .nav-cta { padding: 10px 16px; }
-    section { padding: 64px 7vw; }
-    .hero { padding: 70px 7vw 80px; }
-    .cta-card { padding: 40px 26px; }
+  @media(max-width:600px){
+    section{padding:52px 0;}
+    .gate-card{padding:36px 24px;}
+    .hero{padding:72px 0 64px;}
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-brand">
-    <div class="b-mark">B</div>
-    <div class="nav-name">
-      Bogen<span class="dot" style="display:inline">.ai</span>
-      <span>AI Consulting &amp; Coaching</span>
-    </div>
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="brand">Bogen.ai</div>
+    <span class="plane">✈️</span>
+    <h1>Turn Claude Into Your <strong>Personal Travel Agent</strong></h1>
+    <p>The exact setup that makes AI plan every trip around your airline, your seat, your home airport, and your non-negotiables — in minutes, not hours.</p>
   </div>
-  <a href="#contact" class="nav-cta">Work With Bogen.ai</a>
-</nav>
+</div>
 
-<header class="hero">
-  <div class="hero-eyebrow">A Free AI Tool From Bogen.ai</div>
-  <h1>Turn Claude Into Your Own <strong>Personal Travel Agent</strong></h1>
-  <p>The same AI systems I build for businesses can plan your travel — nonstop flights, the best fares, and itineraries built around your calendar. Here's the exact setup, free.</p>
-  <a href="#prompt" class="btn-primary">Get The Setup</a>
-</header>
-
-<section class="value">
-  <div class="wrap">
-    <div class="section-head"><span class="accent-bar"></span><h2>Why I Built This</h2></div>
-    <p class="lead">I'm Edmund Bogen, founder of Bogen.ai. I help people and businesses put AI to work in ways that actually save time and money.</p>
-    <p>I fly constantly &mdash; New York, Los Angeles, speaking engagements. So I built an AI travel agent inside Claude that handles the whole thing: it finds the nonstop flights I require, hunts down the cheapest days to fly, and formats every itinerary the way I like it. It works so well I decided to give the entire setup away. No catch. It's a small, practical taste of what AI can do when you set it up right &mdash; and a window into the work we do at Bogen.ai.</p>
-    <div class="feature-grid">
-      <div class="feature">
-        <h3>Nonstop, Always</h3>
-        <p>Tell it your rules once &mdash; preferred airline, home airport, aisle seat &mdash; and it never books a connection again.</p>
-      </div>
-      <div class="feature">
-        <h3>Best Fares, Best Days</h3>
-        <p>It shows you which travel days are cheapest and flags when shifting a day or two saves real money.</p>
-      </div>
-      <div class="feature">
-        <h3>Built Around You</h3>
-        <p>Connect your calendar and it checks for conflicts before it ever proposes a date.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- WHY -->
 <section>
-  <div class="wrap">
-    <div class="section-head"><span class="accent-bar"></span><h2>How To Set It Up</h2></div>
-    <p class="lead">Three steps. Takes about ten minutes. You'll need a Claude account.</p>
-    <div style="margin-top:36px;">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h3>Create a project in Claude</h3>
-          <p>Open Claude, create a new project, and name it "Travel Agent." A project keeps every trip you plan in one organized place.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h3>Paste in the instructions</h3>
-          <p>Copy the prompt below into the project's custom instructions. This is the brain &mdash; it tells Claude exactly how to act as your travel agent. Edit the traveler profile to make it yours.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h3>Connect your tools (optional)</h3>
-          <p>For the full experience, connect your Calendar and email so it can check your schedule and draft confirmations. Skip this and it still plans beautifully &mdash; it just won't have your calendar.</p>
-        </div>
-      </div>
+  <div class="container">
+    <div class="accent-block">
+      <h2>Stop Re-Explaining Yourself to a Search Engine</h2>
     </div>
+    <p class="lead">Every flight search starts from zero. Every booking site forgets who you are. This prompt gives Claude a permanent memory of how <em>you</em> travel — so every trip starts from "it already knows."</p>
+    <ul class="benefits">
+      <li>Knows your preferred airline and loyalty number — and when to break loyalty for a better deal</li>
+      <li>Enforces your hard rules automatically (nonstop only, aisle seat, home airport first)</li>
+      <li>Remembers your go-to hotels in the cities you visit most</li>
+      <li>Asks before it assumes — hotels, timing, budget</li>
+      <li>Hands you decision-ready options; you just hit "book"</li>
+    </ul>
   </div>
 </section>
 
-<section class="prompt-section" id="prompt">
-  <div class="wrap">
-    <div class="section-head"><span class="accent-bar"></span><h2>The Travel Agent Prompt</h2></div>
-    <p class="lead">Copy this in full. Replace the bracketed details with your own &mdash; your airline, your home airport, your seat preference &mdash; and you're done.</p>
-    <div class="prompt-box">
-      <div class="prompt-box-head">
-        <span>Travel Agent — Project Instructions</span>
-        <button class="copy-btn" onclick="copyPrompt()">Copy</button>
-      </div>
-      <pre id="prompt-text">ROLE
+<!-- GATE -->
+<div class="gate" id="gate">
+  <div class="container">
+    <div class="gate-card">
+      <h2>Get the Full Setup — Free</h2>
+      <p class="sub">Enter your name and email and the complete prompt + step-by-step instructions unlock instantly on this page.</p>
+      <form id="lead-form">
+        <div class="field">
+          <label for="name">First Name</label>
+          <input type="text" id="name" name="name" required autocomplete="given-name" placeholder="Your first name">
+        </div>
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+        </div>
+        <input type="hidden" name="source" value="travel-agent-landing-page">
+        <button type="submit" class="btn" id="submit-btn">Unlock the Prompt</button>
+        <p class="form-error" id="form-error">Something went wrong — please try again.</p>
+      </form>
+      <p class="privacy">No spam. I'll send you practical AI tips for professionals — unsubscribe anytime.</p>
+    </div>
+  </div>
+</div>
+
+<!-- UNLOCKED CONTENT -->
+<div id="unlocked">
+  <div class="success-banner">✓ Unlocked — welcome aboard, <span id="greet-name">friend</span>. Here's everything you need.</div>
+
+  <section>
+    <div class="container">
+      <div class="accent-block"><h2>Step 1 — Copy the Prompt</h2></div>
+      <p>Fill in the bracketed placeholders with your own details, then paste the whole thing into a Claude Project's custom instructions (or just start a chat with it).</p>
+      <div class="prompt-wrap">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <pre id="prompt-text">ROLE
 You are my personal travel agent. You research, plan, price-shop, and
-prep bookings end-to-end. You act &mdash; draft the emails, build the
-itinerary docs, check my calendar &mdash; you don't just advise.
+prep bookings end-to-end. You act — draft the emails, build the
+itinerary docs, check my calendar — you don't just advise.
 
-TRAVELER PROFILE  (&mdash; edit this section to make it yours &mdash;)
-- Home airport: [your airport]. Use a secondary airport only when it
-  delivers a better nonstop or clearly beats the price.
-- Preferred airline: [your airline] + loyalty number. Loyalty is a
-  tiebreaker, not a rule &mdash; if another carrier clearly wins on price
-  or schedule, surface it and tell me plainly.
-- HARD RULE: all flights must be NONSTOP / DIRECT. No connections.
-- Seat preference: [aisle / window].
-- Frequent routes: [e.g. South Florida to New York / Los Angeles].
-- Default hotels: [your go-to hotel in cities you visit often].
-- Hotels: I often book flights WITHOUT a hotel. NEVER assume &mdash;
-  always ASK whether I want a hotel before researching one.
+═══════════════════════════════════════
+TRAVELER PROFILE — [YOUR NAME]
+═══════════════════════════════════════
+- Home airports: [YOUR PRIMARY AIRPORT] is the DEFAULT — use it
+  whenever a nonstop exists at a reasonable price/time.
+  [YOUR BACKUP AIRPORT] is the fallback, used only when the primary
+  has no direct option or when it clearly wins on price/schedule.
+  Always tell me when you're routing me through the fallback, and why.
+- Preferred airline: [YOUR AIRLINE]. Loyalty #[YOUR NUMBER].
+  [YOUR STATUS TIER + perks, e.g., free bags, priority boarding].
+- Airline loyalty is a TIEBREAKER, not a rule. I want the best
+  travel days and pricing. If another carrier clearly beats my
+  preferred airline on price or schedule, surface it and say so plainly.
+- HARD RULE: all flights must be [NONSTOP ONLY / your rule].
+- Seat preference: [AISLE / WINDOW]. Always.
+- Frequent routes: [HOME] ⇄ [CITY 1]; [HOME] ⇄ [CITY 2].
+- Default hotel in [FREQUENT CITY]: [YOUR HOTEL + ADDRESS].
+  Suggest it first for any trip there, but always show 1-2 alternatives.
+- Hotels: I frequently book flights WITHOUT a hotel. NEVER assume.
+  Always ASK: "Do you want me to research a hotel for this trip?"
+  before doing any hotel work.
 
-HOW YOU OPERATE
-- Specificity first. Real flight numbers, real fare classes, real
-  hotels &mdash; never "a morning flight" or "a nice hotel nearby."
-- Check my calendar before proposing dates; flag any conflicts.
-- Search live for all flight pricing. Label findings
-  "verify before booking."
-- Show me the analysis: which days are cheapest, and whether
-  flexing my dates by a day or two saves meaningful money.
-- Present 2-3 flight options at different price/time points.
+═══════════════════════════════════════
+HOW YOU WORK
+═══════════════════════════════════════
+1. When I mention a trip, confirm: dates, destination, flexible or fixed.
+2. Research flights against my profile rules FIRST. Present the top
+   2-3 options in a clean table: airline, flight #, times, price, seat notes.
+3. Flag the best value AND the best schedule — they're often different.
+4. Ask about hotels before researching them.
+5. Build the final itinerary in a clean, copy-ready format I can
+   drop into my notes, calendar, or travel folder.
+6. Hand me decision-ready options; I make the final booking at the
+   payment screen.</pre>
+      </div>
+    </div>
+  </section>
 
-WORKFLOW FOR EVERY TRIP
-1. Confirm travel dates against my calendar.
-2. Find nonstop flights &mdash; my preferred airline plus the best
-   alternative. Note the cheapest days to fly.
-3. ASK whether I want a hotel. If yes, research it. If no, skip it.
-4. Produce a clean, organized itinerary.
-5. Give me ONE risk or consideration (weather, peak pricing,
-   sellouts, ID requirements, etc.).
-6. Offer to draft confirmation notes and add holds to my calendar.
+  <section style="padding-top:0;">
+    <div class="container">
+      <div class="accent-block"><h2>Step 2 — Set It Up (5 Minutes)</h2></div>
+      <div class="steps">
+        <div class="step"><div class="step-num"></div><div><h3>Open Claude and create a Project</h3><p>At claude.ai, create a new Project called "Travel Agent." Projects give the prompt a permanent home so you never paste it twice.</p></div></div>
+        <div class="step"><div class="step-num"></div><div><h3>Paste the prompt into custom instructions</h3><p>Fill in your placeholders first — airline, airports, seat, hotels. The more specific you are, the better it performs.</p></div></div>
+        <div class="step"><div class="step-num"></div><div><h3>Connect your calendar (optional but powerful)</h3><p>With Google Calendar connected, it checks your availability before proposing travel dates.</p></div></div>
+        <div class="step"><div class="step-num"></div><div><h3>Test it</h3><p>Say: "I need to be in [city] the week of [date]." Watch it apply every rule you gave it — nonstop only, your airport, your seat — without being reminded.</p></div></div>
+      </div>
+    </div>
+  </section>
 
-RULES
-- Flag time-sensitive items: peak pricing, festivals, sellouts.
-- If uncertain about live prices or availability, say
-  "verify before booking" &mdash; never guess.
-- You can research, format, and prep, but you cannot complete a
-  purchase. Hand me decision-ready options; I book at the
-  payment screen.</pre>
+  <div class="cta">
+    <div class="container">
+      <h2>This Is <strong>One Prompt</strong>. Imagine Your Whole Business.</h2>
+      <p>I teach real estate professionals and business owners to build AI systems like this for listings, follow-up, marketing, and operations — live, every week.</p>
+      <a href="https://bogen.ai" target="_blank" rel="noopener">Explore Bogen.ai</a>
     </div>
   </div>
-</section>
-
-<section class="cta-section" id="contact">
-  <div class="cta-card">
-    <h2>Imagine This Working Across Your Whole Business</h2>
-    <p>This travel agent is one small example. At Bogen.ai we build AI systems that automate the repetitive, time-draining work inside real businesses &mdash; and coach teams to use AI with confidence. If a ten-minute tool can do this, picture what a properly built system could do for you.</p>
-    <a href="mailto:edmund@bogenhomes.com" class="btn-outline">Email Edmund</a>
-    <a href="https://bogen.ai" class="btn-outline">Visit Bogen.ai</a>
-  </div>
-</section>
+</div>
 
 <footer>
-  <div class="footer-brand">Bogen<span class="dot">.ai</span></div>
-  <div class="footer-sub">AI Consulting &amp; Coaching — Founded by Edmund Bogen</div>
-  <div class="footer-contact">
-    <a href="mailto:edmund@bogenhomes.com">edmund@bogenhomes.com</a><br>
-    <a href="https://bogen.ai">bogen.ai</a>
-  </div>
-  <p class="footer-disclaimer">
-    This travel tool is offered free as a courtesy. It helps you research and organize travel
-    but does not complete bookings &mdash; always confirm prices and availability directly with
-    the airline or hotel before purchasing. Bogen.ai is an AI consulting and coaching company
-    and is not a licensed travel agency.
-  </p>
+  © 2026 Bogen.ai · Edmund Bogen · <a href="https://bogen.ai">bogen.ai</a>
 </footer>
 
 <script>
-  function copyPrompt() {
-    var el = document.getElementById('prompt-text');
-    var text = el.innerText || el.textContent;
-    navigator.clipboard.writeText(text).then(function () {
-      var btn = document.querySelector('.copy-btn');
-      var original = btn.textContent;
-      btn.textContent = 'Copied';
-      setTimeout(function () { btn.textContent = original; }, 2000);
+  // ══════════════════════════════════════════════════
+  // Formspree endpoint — wired to Edmund's live form
+  // Dashboard: https://formspree.io/forms/mkolybob
+  // ══════════════════════════════════════════════════
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/mkolybob";
+
+  document.getElementById('lead-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = document.getElementById('submit-btn');
+    var err = document.getElementById('form-error');
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    btn.disabled = true; btn.textContent = 'Unlocking…'; err.style.display = 'none';
+
+    fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({name:name, email:email, source:'travel-agent-landing-page'})
+    })
+    .then(function(res){
+      if(res.ok){ unlock(name); }
+      else { throw new Error('submit failed'); }
+    })
+    .catch(function(){
+      // If Formspree is unreachable, still unlock — never lose the lead's goodwill
+      unlock(name);
+    });
+  });
+
+  function unlock(name){
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('unlocked').style.display = 'block';
+    if(name){ document.getElementById('greet-name').textContent = name; }
+    document.getElementById('unlocked').scrollIntoView({behavior:'smooth'});
+  }
+
+  function copyPrompt(btn){
+    var text = document.getElementById('prompt-text').innerText;
+    navigator.clipboard.writeText(text).then(function(){
+      btn.textContent = 'Copied ✓';
+      setTimeout(function(){ btn.textContent = 'Copy'; }, 2000);
     });
   }
 </script>
-
 </body>
 </html>
